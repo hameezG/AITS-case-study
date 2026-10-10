@@ -4,10 +4,6 @@ An adaptive GCSE/A-Level tutoring platform that diagnoses student learning
 states across multiple surfaces and automatically selects the most effective
 intervention, without calling a language model for every decision.
 
-> **Status:** The platform (quizzes, flashcards, past papers, AI features)
-> is deployed on Vercel. The OODA agent, decision model, and retraining
-> pipeline are my thesis work, running in a separate Oracle Cloud deployment,
-> and are not part of the live student experience.
 
 ![The nudge card](images/fig7_3_agent_nudge_card.png)
 *The nudge card: A proactive cognitive intervention card displaying the companion avatar, situational diagnosis, reasoning, and action buttons. (Thesis deployment)*
@@ -93,26 +89,27 @@ flowchart TD
 ```mermaid
 flowchart TD
     subgraph Agent["Real-time agent (each student action)"]
-        direction TB
-        A["Student action<br/>(quiz, flashcard, past paper)"] --> B["Observe<br/>log learning event"]
-        B --> C["Orient<br/>classify situation from recent events"]
-        C --> D{"Situation detected<br/>and not on cooldown?"}
+        direction LR
+        A["Student action<br/>(quiz, flashcard,<br/>past paper)"] --> B["Observe<br/>log event"]
+        B --> C["Orient<br/>classify situation"]
+        C --> D{"Situation found,<br/>no cooldown?"}
         D -- No --> E["No nudge"]
-        D -- Yes --> F["Decide<br/>decision model scores each resource"]
-        F --> G["Act<br/>LLM writes short message, nudge sent"]
+        D -- Yes --> F["Decide<br/>model scores<br/>resources"]
+        F --> G["Act<br/>LLM message<br/>+ nudge sent"]
     end
 
     subgraph Loop["Learning loop (outcomes and retraining)"]
-        direction TB
-        H["Student accepts or skips"] --> I["Later events close the outcome<br/>accuracy before vs after"]
-        I --> J["Labeled outcome saved"]
-        J --> K{"Every 50 labeled outcomes?"}
-        K -- Yes --> L["Retrain decision model"]
-        K -- No --> M["Wait for more outcomes"]
+        direction LR
+        H["Student accepts<br/>or skips"] --> I["Outcome closed<br/>accuracy before<br/>vs after"]
+        I --> J["Labeled outcome<br/>saved"]
+        J --> K{"Every 50<br/>outcomes?"}
+        K -- Yes --> L["Retrain<br/>decision model"]
+        K -- No --> M["Keep collecting"]
     end
 
-    G --> H
-    L -.->|"updated model"| F
+    Agent -->|"nudge shown"| Loop
+    Loop -.->|"updated model"| Agent
+
 ```
 
 1. A student submits a quiz answer. The grading endpoint returns the result
@@ -536,6 +533,13 @@ would use a production WSGI server with multiple workers, optimised frontend
 builds, a reverse proxy with HTTPS, and proper secret management.
 
 ---
+## Scope and Status
+
+The OODA agent, decision model, and retraining pipeline are my thesis work.
+I built and evaluated them in a separate Oracle Cloud deployment, and they are
+not yet part of the live student app. The surrounding platform (quizzes,
+flashcards, past papers, admin portal) runs on Vercel. Results in this
+write-up come from a controlled simulation, not from live student data.
 
 ## Note on Source Code
 
