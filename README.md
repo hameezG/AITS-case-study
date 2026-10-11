@@ -1,18 +1,30 @@
-# Revision Platform and Agentic Tutoring System
-### Case study: Industrial learning platform, backend engineering, and thesis AI agent layer
+# Agentic Intelligent Tutoring System
 
-A GCSE and A-Level revision platform with timed quizzes, spaced flashcards, video lessons, and past papers. I contributed to backend engineering across the platform and designed an autonomous AI agent layer as my thesis to guide struggling students.
+A student gets the same concept wrong in a quiz, a flashcard, and a past paper, and nothing notices. This project is an agent that does, and decides what they should do next.
 
-![Student Revision Dashboard](images/fig7_1_student_dashboard.png)
-*Student revision dashboard showing syllabus completion rings, predicted grades, active diagnostic quests, and the companion avatar. (Thesis deployment)*
+![The nudge card](images/fig7_3_agent_nudge_card.png)
+*The nudge card: a proactive intervention card showing the companion avatar, the agent's diagnosis, its reasoning, and action buttons. (Thesis deployment)*
 
 > Documentation-only case study. The source code is private (see the note at the bottom).
+
+---
+
+## The Problem and What I Built
+
+Students revising for UK school exams rarely get timely, personalised guidance. A textbook can't tell that you've misunderstood the same concept in three different practice formats. A generic quiz app can't decide whether you need a video, a flashcard session, or a conversation with a tutor.
+
+This is a case study of a GCSE/A-Level revision platform built with a team at SELFTECH: timed quizzes, spaced flashcards, video lessons, past papers, and an admin portal. I did backend engineering across the platform (API, database design, content pipelines, Docker). For my thesis, I also designed and built an agentic layer behind those surfaces. It watches every student interaction, works out where the student is stuck, and picks the most effective next step using a lightweight ML model (not an LLM call per decision). It then checks whether that step helped and retrains itself on the results.
+
+I evaluated the agent in a controlled simulation, not in the live student application (see Scope and Status at the bottom).
 
 ---
 
 ## The Platform
 
 The platform is an industrial project developed with a team to help UK students prepare for GCSE and A-Level examinations across timed quizzes, spaced flashcards, video lessons, split-screen past papers, and conversational mentoring. For administrators, it provides curriculum management, LaTeX question authoring, bulk exam package ingestion, and student cohort analytics.
+
+![Student Revision Dashboard](images/fig7_1_student_dashboard.png)
+*Student revision dashboard showing syllabus completion rings, predicted grades, active diagnostic quests, and the companion avatar. (Thesis deployment)*
 
 | Surface | Target User | Capabilities | Environment |
 |---|---|---|---|
@@ -181,9 +193,6 @@ The platform operates across two separate environments:
 ## The AI Agent (Thesis Work)
 
 The core focus of my thesis was designing and evaluating an autonomous agent layer that intervenes when a student struggles across revision surfaces.
-
-![The nudge card](images/fig7_3_agent_nudge_card.png)
-*The nudge card: a proactive intervention card showing the companion avatar, the agent's diagnosis, its reasoning, and action buttons. (Thesis deployment)*
 
 ### The Problem
 
