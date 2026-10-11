@@ -1,4 +1,5 @@
 # Agentic Intelligent Tutoring System
+### Case study: the agent layer of Genius Hub
 
 A student gets the same concept wrong in a quiz, a flashcard, and a past paper, and nothing notices. This project is an agent that does, and decides what they should do next.
 
@@ -8,6 +9,17 @@ A student gets the same concept wrong in a quiz, a flashcard, and a past paper, 
 > Documentation-only case study. The source code is private (see the note at the bottom).
 
 ---
+## The Platform
+
+Genius Hub is a full GCSE/A-Level revision product built by a team. Students get:
+
+- Timed quizzes with instant grading and formula rendering
+- Spaced-repetition flashcards with AI-generated variations
+- Video lessons with in-video checkpoint questions
+- Split-screen past exam papers with error self-reporting
+- AI tutors, including Professor Maxwell, with a 3D animated companion
+
+Behind it, an admin portal manages the curriculum hierarchy, the question bank, and bulk import of exam papers. The backend is a FastAPI service with a MySQL database, and the whole system runs as four Docker Compose services. The agent described below is one layer of this platform, and the one I designed and built for my thesis.
 
 ## The Problem and What I Built
 
