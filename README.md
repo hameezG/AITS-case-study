@@ -17,7 +17,7 @@ Genius Hub is a full GCSE/A-Level revision product built by a team. Students get
 - Spaced-repetition flashcards with AI-generated variations
 - Video lessons with in-video checkpoint questions
 - Split-screen past exam papers with error self-reporting
-- AI tutors, including Professor Maxwell, with a 3D animated companion
+- AI tutor named professor Maxwell.
 
 Behind it, an admin portal manages the curriculum hierarchy, the question bank, and bulk import of exam papers. The backend is a FastAPI service with a MySQL database, and the whole system runs as four Docker Compose services. The agent described below is one layer of this platform, and the one I designed and built for my thesis.
 
